@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="faze4_gazebo" params="prefix">
+
+    <!-- ros_control plugin
+    <gazebo>
+      <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        <parameters>$(find faze4_bringup)/config/rrbot_gazebo_forward_controller_position.yaml</parameters>
+      </plugin>
+    </gazebo>-->
+
+    <gazebo reference="${prefix}base_link">
+      <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="${prefix}link1">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="${prefix}link2">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="${prefix}link3">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="${prefix}link4">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="${prefix}link5">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="${prefix}link6">
+      <mu1>0.2</mu1>
+      <mu2>0.2</mu2>
+      <material>Gazebo/Orange</material>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

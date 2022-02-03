@@ -1,0 +1,9 @@
+<library path="faze4_hardware">
+  <class name="faze4_hardware/Faze4SystemPositionOnlyHardware"
+         type="faze4_hardware::Faze4SystemPositionOnlyHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ROS2 Control minimal robot protocol. This is example for start porting the robot from ROS 1.
+    </description>
+  </class>
+</library>

@@ -1,0 +1,14 @@
+controller_names:
+  - joint_trajectory_controller
+
+joint_trajectory_controller:
+  action_ns: follow_joint_trajectory
+  type: FollowJointTrajectory
+  default: true
+  joints:
+    - faze4_joint1
+    - faze4_joint2
+    - faze4_joint3
+    - faze4_joint4
+    - faze4_joint5
+    - faze4_joint6

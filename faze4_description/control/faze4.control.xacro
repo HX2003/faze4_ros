@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="faze4_ros2_control" params="name prefix use_fake_hardware serial_device serial_baudrate">
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <plugin>faze4_hardware/Faze4SystemPositionOnlyHardware</plugin>
+        <param name="use_fake_hardware">${use_fake_hardware}</param>
+        <param name="serial_device">${serial_device}</param>
+        <param name="serial_baudrate">${serial_baudrate}</param>
+      </hardware>
+
+      <joint name="${prefix}joint1">
+        <command_interface name="position">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint2">
+        <command_interface name="position">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint3">
+        <command_interface name="position">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint4">
+        <command_interface name="position">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint5">
+        <command_interface name="position">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="${prefix}joint6">
+        <command_interface name="position">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <state_interface name="position"/>
+      </joint>
+    </ros2_control>
+
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="faze4_robot">
+  <xacro:arg name="prefix" default="faze4_" />
+  <xacro:arg name="use_fake_hardware" default="" />
+  <xacro:arg name="serial_device" default="" />
+  <xacro:arg name="serial_baudrate" default="" />
+
+  <!-- Import FAZE4 macro -->
+  <xacro:include filename="$(find faze4_description)/urdf/faze4_description.urdf.xacro" />
+
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find faze4_description)/gazebo/faze4.materials.xacro" />
+
+  <!-- Import FAZE4 control description -->
+  <xacro:include filename="$(find faze4_description)/control/faze4.control.xacro" />
+
+  <!-- Used for fixing robot -->
+  <link name="world"/>
+  <gazebo reference="world">
+    <static>true</static>
+  </gazebo>
+
+  <xacro:faze4 parent="world" prefix="$(arg prefix)">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:faze4>
+
+  <xacro:faze4_ros2_control
+    name="faze4" prefix="$(arg prefix)" serial_device="$(arg serial_device)" serial_baudrate="$(arg serial_baudrate)" use_fake_hardware="$(arg use_fake_hardware)"/>
+
+</robot>
