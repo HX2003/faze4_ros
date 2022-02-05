@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>faze4_moveit_config</name>
+  <name>faze4_gui</name>
   <version>0.0.0</version>
   <description>
     <p>
-      MoveIt2 configuration files for FAZE4
+      FAZE4 GUI Plugin in RVIZ
     </p>
   </description>
 
@@ -14,14 +14,17 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <depend>rclcpp</depend>
+  <depend>rviz_common</depend>
+  <depend>libqt5-widgets</depend>
+  <depend>rviz2</depend>
+  <depend>pluginlib</depend>
+  <depend>rviz_visual_tools</depend>>
+
   <exec_depend>faze4_description</exec_depend>
   <exec_depend>moveit_ros_move_group</exec_depend>
   <exec_depend>moveit_kinematics</exec_depend>
   <exec_depend>moveit_planners_ompl</exec_depend>
-  <exec_depend>moveit_ros_visualization</exec_depend>
-  <exec_depend>joint_state_publisher</exec_depend>
-  <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>xacro</exec_depend>
 
   <export>
       <build_type>ament_cmake</build_type>

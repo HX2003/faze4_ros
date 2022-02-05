@@ -1,0 +1,9 @@
+<library path="faze4_gui">
+  <class name="faze4_gui/Faze4Gui"
+         type="faze4_gui::Faze4Gui"
+         base_class_type="rviz_common::Panel">
+    <description>
+      faze4_gui
+    </description>
+  </class>
+</library>

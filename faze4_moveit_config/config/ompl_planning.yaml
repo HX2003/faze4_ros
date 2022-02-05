@@ -124,6 +124,9 @@ planner_configs:
     type: geometric::TrajOpt
 
 faze4_arm:
+  enforce_constrained_state_space: true
+  projection_evaluator: joints(faze4_joint1,faze4_joint2,faze4_joint3,faze4_joint4,faze4_joint5,faze4_joint6)
+
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault

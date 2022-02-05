@@ -12,9 +12,8 @@ Compile and flash this Arduino [sketch](https://github.com/HX2003/faze4_ros/blob
 # Building Source
 ```
 cd src
-git clone https://github.com/ros-controls/ros2_control
-git clone https://github.com/ros-controls/ros2_controllers
 git clone https://github.com/HX2003/faze4_ros
+vcs import < faze4_ros/faze4_ros.repos
 cd ..
 ```
 
@@ -22,11 +21,6 @@ cd ..
 ```
 rosdep install --from-paths src --ignore-src -r -y
 sudo apt-get install ros-rolling-moveit-simple-controller-manager
-```
-
-* Source ros *
-```
-source /opt/ros/rolling/setup.bash
 ```
 
 * Build everything with:
@@ -51,4 +45,14 @@ ros2 launch faze4_moveit_config demo.launch.py serial_device:='/dev/ttyUSB0' ser
 Without any hardware connected via serial
  ```
 ros2 launch faze4_moveit_config demo.launch.py use_fake_hardware:='true'
-```
+ ```
+
+# Interactive Marker
+Drag the marker around and click plan & execute in the MotionPlanning panel.
+
+# Faze4Gui
+Click plan & execute in the Faze4Gui panel to run one of the following demos
+- Box Constraints Demo
+- Plane Constraints Demo
+- Line Constraints Demo
+- Orientation Constraints Demo

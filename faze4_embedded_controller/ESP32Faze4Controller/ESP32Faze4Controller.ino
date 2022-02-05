@@ -87,12 +87,30 @@ void setup() {
 void loop() {
   if (Serial2.available()) {
     String inputString = Serial2.readStringUntil('\n');
-    processString(inputString);
+    const char *str = inputString.c_str();
+
+    float joints[6];
+    if (sscanf(str, "SET: %f, %f, %f, %f, %f, %f", &joints[0], &joints[1], &joints[2], &joints[3], &joints[4], &joints[5]) == 6) {
+      Serial.printf("Received %f, %f, %f, %f, %f, %f \n", joints[0], joints[1], joints[2], joints[3], joints[4], joints[5]);
+
+      for (int i = 0; i < 6; i++) {
+        steppers[i]->moveTo(joints[i]*computed_multiplier[i]);
+      }
+    }
   }
 
   if (Serial.available()) {
     String inputString = Serial.readStringUntil('\n');
-    processString(inputString);
+    const char *str = inputString.c_str();
+
+    float joints[6];
+    if (sscanf(str, "SET: %f, %f, %f, %f, %f, %f", &joints[0], &joints[1], &joints[2], &joints[3], &joints[4], &joints[5]) == 6) {
+      Serial.printf("Received %f, %f, %f, %f, %f, %f \n", joints[0], joints[1], joints[2], joints[3], joints[4], joints[5]);
+
+      for (int i = 0; i < 6; i++) {
+        steppers[i]->moveTo(joints[i]*computed_multiplier[i]);
+      }
+    }
   }
   /*if (Serial.available() > 0) {
     String myString = Serial.readStringUntil('\n');
@@ -115,28 +133,4 @@ void loop() {
 
     Serial.println("Moving motor " + motor +  " to: " + String(number));
     }*/
-}
-
-void processString(String inputString) {
-  const char *str = inputString.c_str();
-
-  if (strncmp("SET:", str, strlen("SET:")) == 0) {
-    float joints[6];
-    if (sscanf(str, "SET: %f, %f, %f, %f, %f, %f", &joints[0], &joints[1], &joints[2], &joints[3], &joints[4], &joints[5]) == 6) {
-      Serial.printf("Received %f, %f, %f, %f, %f, %f \n", joints[0], joints[1], joints[2], joints[3], joints[4], joints[5]);
-
-      for (int i = 0; i < 6; i++) {
-        steppers[i]->moveTo(joints[i]*computed_multiplier[i]);
-      }
-    }
-  } else if (strncmp("GET:", str, strlen("GET:")) == 0) {
-    float joints[6];
-
-    for (int i = 0; i < 6; i++) {
-      joints[i] = steppers[i]->getCurrentPosition() / computed_multiplier[i];
-    }
-
-    Serial.printf("SEND: %f, %f, %f, %f, %f, %f \n", joints[0], joints[1], joints[2], joints[3], joints[4], joints[5]);
-    Serial2.printf("SEND: %f, %f, %f, %f, %f, %f \n", joints[0], joints[1], joints[2], joints[3], joints[4], joints[5]);
-  }
 }
