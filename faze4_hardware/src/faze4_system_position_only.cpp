@@ -15,29 +15,25 @@
 #include "faze4_system_position_only.hpp"
 
 #include <chrono>
-
 #include <cmath>
-
 #include <limits>
-
 #include <memory>
-
 #include <vector>
 
-#include "hardware_interface/types/hardware_interface_type_values.hpp"
-
 #include "faze4_driver.hpp"
-
+#include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 namespace faze4_hardware
 {
-CallbackReturn Faze4SystemPositionOnlyHardware::on_init(
+hardware_interface::CallbackReturn Faze4SystemPositionOnlyHardware::on_init(
   const hardware_interface::HardwareInfo & info)
 {
-  if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
+  if (
+    hardware_interface::SystemInterface::on_init(info) !=
+    hardware_interface::CallbackReturn::SUCCESS)
   {
-    return CallbackReturn::ERROR;
+    return hardware_interface::CallbackReturn::ERROR;
   }
 
   std::string use_fake_hardware_str = info_.hardware_parameters["use_fake_hardware"];
@@ -62,7 +58,7 @@ CallbackReturn Faze4SystemPositionOnlyHardware::on_init(
         rclcpp::get_logger("Faze4SystemPositionOnlyHardware"),
         "Joint '%s' has %zu command interfaces found. 1 expected.", joint.name.c_str(),
         joint.command_interfaces.size());
-      return CallbackReturn::ERROR;
+      return hardware_interface::CallbackReturn::ERROR;
     }
 
     if (joint.command_interfaces[0].name != hardware_interface::HW_IF_POSITION)
@@ -71,7 +67,7 @@ CallbackReturn Faze4SystemPositionOnlyHardware::on_init(
         rclcpp::get_logger("Faze4SystemPositionOnlyHardware"),
         "Joint '%s' have %s command interfaces found. '%s' expected.", joint.name.c_str(),
         joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
-      return CallbackReturn::ERROR;
+      return hardware_interface::CallbackReturn::ERROR;
     }
 
     if (joint.state_interfaces.size() != 1)
@@ -80,7 +76,7 @@ CallbackReturn Faze4SystemPositionOnlyHardware::on_init(
         rclcpp::get_logger("Faze4SystemPositionOnlyHardware"),
         "Joint '%s' has %zu state interface. 1 expected.", joint.name.c_str(),
         joint.state_interfaces.size());
-      return CallbackReturn::ERROR;
+      return hardware_interface::CallbackReturn::ERROR;
     }
 
     if (joint.state_interfaces[0].name != hardware_interface::HW_IF_POSITION)
@@ -89,14 +85,14 @@ CallbackReturn Faze4SystemPositionOnlyHardware::on_init(
         rclcpp::get_logger("Faze4SystemPositionOnlyHardware"),
         "Joint '%s' have %s state interface. '%s' expected.", joint.name.c_str(),
         joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
-      return CallbackReturn::ERROR;
+      return hardware_interface::CallbackReturn::ERROR;
     }
   }
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-CallbackReturn Faze4SystemPositionOnlyHardware::on_configure(
+hardware_interface::CallbackReturn Faze4SystemPositionOnlyHardware::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("Faze4SystemPositionOnlyHardware"), "Configuring");
@@ -118,7 +114,7 @@ CallbackReturn Faze4SystemPositionOnlyHardware::on_configure(
     {
       RCLCPP_ERROR(
         rclcpp::get_logger("Faze4SystemPositionOnlyHardware"), "Failed to initialise serial");
-      return CallbackReturn::FAILURE;
+      return hardware_interface::CallbackReturn::FAILURE;
     }
   }
 
@@ -132,7 +128,7 @@ CallbackReturn Faze4SystemPositionOnlyHardware::on_configure(
   RCLCPP_INFO(
     rclcpp::get_logger("Faze4SystemPositionOnlyHardware"), "System Successfully configured!");
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
 std::vector<hardware_interface::StateInterface>
@@ -161,7 +157,7 @@ Faze4SystemPositionOnlyHardware::export_command_interfaces()
   return command_interfaces;
 }
 
-CallbackReturn Faze4SystemPositionOnlyHardware::on_activate(
+hardware_interface::CallbackReturn Faze4SystemPositionOnlyHardware::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("Faze4SystemPositionOnlyHardware"), "Starting ...please wait...");
@@ -175,10 +171,10 @@ CallbackReturn Faze4SystemPositionOnlyHardware::on_activate(
   RCLCPP_INFO(
     rclcpp::get_logger("Faze4SystemPositionOnlyHardware"), "System Successfully started!");
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-CallbackReturn Faze4SystemPositionOnlyHardware::on_deactivate(
+hardware_interface::CallbackReturn Faze4SystemPositionOnlyHardware::on_deactivate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("Faze4SystemPositionOnlyHardware"), "Stopping ...please wait...");
@@ -186,10 +182,11 @@ CallbackReturn Faze4SystemPositionOnlyHardware::on_deactivate(
   RCLCPP_INFO(
     rclcpp::get_logger("Faze4SystemPositionOnlyHardware"), "System successfully stopped!");
 
-  return CallbackReturn::SUCCESS;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-hardware_interface::return_type Faze4SystemPositionOnlyHardware::read()
+hardware_interface::return_type Faze4SystemPositionOnlyHardware::read(
+  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   if (use_fake_hardware_)
   {
@@ -210,7 +207,8 @@ hardware_interface::return_type Faze4SystemPositionOnlyHardware::read()
   return hardware_interface::return_type::OK;
 }
 
-hardware_interface::return_type Faze4SystemPositionOnlyHardware::write()
+hardware_interface::return_type Faze4SystemPositionOnlyHardware::write(
+  const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   if (use_fake_hardware_)
   {

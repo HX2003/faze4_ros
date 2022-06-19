@@ -19,7 +19,7 @@
   <depend>libqt5-widgets</depend>
   <depend>rviz2</depend>
   <depend>pluginlib</depend>
-  <depend>rviz_visual_tools</depend>>
+  <depend>moveit_visual_tools</depend>>
 
   <exec_depend>faze4_description</exec_depend>
   <exec_depend>moveit_ros_move_group</exec_depend>
