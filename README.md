@@ -20,7 +20,6 @@ cd ..
 * Install dependencies:
 ```
 rosdep install --from-paths src --ignore-src -r -y
-sudo apt-get install ros-rolling-moveit-simple-controller-manager
 ```
 
 * Build everything with:
